@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Lorelei Avatar Generator</title>
+</head>
+
+<body>
+    <h1>Avatar Generator</h1>
+    <div class="container">
+        <div class="customization">
+        <div class="gender-selection">
+            <label for="gender">Seed:</label>
+            <select id="gender" onchange="generateAvatar()">
+                <option value="boy">Felix</option>
+                <option value="girl">Aneka</option>
+            </select>
+        </div>
+        <div class="eyebrow-selection">
+            <label for="eyebrow">Eyebrow:</label>
+            <select id="eyebrow" onchange="generateAvatar()">
+                <option value="variant01">Variant 01</option>
+                <option value="variant02">Variant 02</option>
+                <option value="variant03">Variant 03</option>
+                <option value="variant04">Variant 04</option>
+                <option value="variant05">Variant 05</option>
+                <option value="variant06">Variant 06</option>
+                <option value="variant07">Variant 07</option>
+                <option value="variant08">Variant 08</option>
+                <option value="variant09">Variant 09</option>
+                <option value="variant10">Variant 10</option>
+                <option value="variant11">Variant 11</option>
+                <option value="variant12">Variant 12</option>
+                <option value="variant13">Variant 13</option>
+            </select>
+            <input type="color" id="eyebrowColor" onchange="generateAvatar()">
+        </div>
+        <div class="eyes-selection">
+            <label for="eyes">Eyes:</label>
+            <select id="eyes" onchange="generateAvatar()">
+                <option value="variant01">Variant 01</option>
+                <option value="variant02">Variant 02</option>
+                <option value="variant03">Variant 03</option>
+                <option value="variant04">Variant 04</option>
+                <option value="variant05">Variant 05</option>
+                <option value="variant06">Variant 06</option>
+                <option value="variant07">Variant 07</option>
+                <option value="variant08">Variant 08</option>
+                <option value="variant09">Variant 09</option>
+                <option value="variant10">Variant 10</option>
+                <option value="variant11">Variant 11</option>
+                <option value="variant12">Variant 12</option>
+                <option value="variant13">Variant 13</option>
+                <option value="variant14">Variant 14</option>
+                <option value="variant15">Variant 15</option>
+                <option value="variant16">Variant 16</option>
+                <option value="variant17">Variant 17</option>
+                <option value="variant18">Variant 18</option>
+                <option value="variant19">Variant 19</option>
+                <option value="variant20">Variant 20</option>
+                <option value="variant21">Variant 21</option>
+                <option value="variant22">Variant 22</option>
+                <option value="variant23">Variant 23</option>
+                <option value="variant24">Variant 24</option>
+            </select>
+            <input type="color" id="eyesColor" onchange="generateAvatar()">
+        </div>
+        <div class="hair-selection">
+            <label for="hair">Hair:</label>
+            <select id="hair" onchange="generateAvatar()">
+                <option value="variant01">Variant 01</option>
+                <option value="variant02">Variant 02</option>
+                <option value="variant03">Variant 03</option>
+                <option value="variant04">Variant 04</option>
+                <option value="variant05">Variant 05</option>
+                <option value="variant06">Variant 06</option>
+                <option value="variant07">Variant 07</option>
+                <option value="variant08">Variant 08</option>
+                <option value="variant09">Variant 09</option>
+                <option value="variant10">Variant 10</option>
+                <option value="variant11">Variant 11</option>
+                <option value="variant12">Variant 12</option>
+                <option value="variant13">Variant 13</option>
+                <option value="variant14">Variant 14</option>
+                <option value="variant15">Variant 15</option>
+                <option value="variant16">Variant 16</option>
+                <option value="variant17">Variant 17</option>
+                <option value="variant18">Variant 18</option>
+                <option value="variant19">Variant 19</option>
+                <option value="variant20">Variant 20</option>
+                <option value="variant21">Variant 21</option>
+                <option value="variant22">Variant 22</option>
+                <option value="variant23">Variant 23</option>
+                <option value="variant24">Variant 24</option>
+                <option value="variant25">Variant 25</option>
+                <option value="variant26">Variant 26</option>
+                <option value="variant27">Variant 27</option>
+                <option value="variant28">Variant 28</option>
+                <option value="variant29">Variant 29</option>
+                <option value="variant30">Variant 30</option>
+                <option value="variant31">Variant 31</option>
+                <option value="variant32">Variant 32</option>
+                <option value="variant33">Variant 33</option>
+                <option value="variant34">Variant 34</option>
+                <option value="variant35">Variant 35</option>
+                <option value="variant36">Variant 36</option>
+                <option value="variant37">Variant 37</option>
+                <option value="variant38">Variant 38</option>
+                <option value="variant39">Variant 39</option>
+                <option value="variant40">Variant 40</option>
+                <option value="variant41">Variant 41</option>
+                <option value="variant42">Variant 42</option>
+                <option value="variant43">Variant 43</option>
+                <option value="variant44">Variant 44</option>
+                <option value="variant45">Variant 45</option>
+                <option value="variant46">Variant 46</option>
+                <option value="variant47">Variant 47</option>
+                <option value="variant48">Variant 48</option>
+            </select>
+            <input type="color" id="hairColor" onchange="generateAvatar()">
+        </div>
+        <div class="hairAccessories-selection">
+            <label for="hairAccessories">Hair Accessories:</label>
+            <input type="checkbox" id="hairAccessoriesCheckbox" onchange="handleHairAccessoriesChange()">
+            <input type="color" id="hairAccessoriesColor" onchange="generateAvatar()" disabled>
+        </div>
+        <div class="glasses-selection">
+            <label for="glasses">Glasses:</label>
+            <input type="checkbox" id="glassesCheckbox" onchange="handleGlassesChange()">
+            <select id="glasses" onchange="generateAvatar()" disabled>
+                <option value="variant01">Variant 01</option>
+                <option value="variant02">Variant 02</option>
+                <option value="variant03">Variant 03</option>
+                <option value="variant04">Variant 04</option>
+                <option value="variant05">Variant 05</option>
+            </select>
+            <input type="color" id="glassesColor" onchange="generateAvatar()" disabled>
+        </div>
+        <div class="freckles-selection">
+            <label for="freckles">Freckles:</label>
+            <input type="checkbox" id="frecklesCheckbox" onchange="handleFrecklesChange()">
+            <input type="color" id="frecklesColor" onchange="generateAvatar()" disabled>
+        </div>
+        <div class="earrings-selection">
+            <label for="earrings">Earrings:</label>
+            <input type="checkbox" id="earringsCheckbox" onchange="handleEarringsChange()">
+            <select id="earrings" onchange="generateAvatar()" disabled>
+                <option value="variant01">Variant 01</option>
+                <option value="variant02">Variant 02</option>
+                <option value="variant03">Variant 03</option>
+            </select>
+            <input type="color" id="earringsColor" onchange="generateAvatar()" disabled>
+        </div>
+        <div class="nose-selection">
+            <label for="nose">Nose:</label>
+            <select id="nose" onchange="generateAvatar()">
+                <option value="variant01">Variant 01</option>
+                <option value="variant02">Variant 02</option>
+                <option value="variant03">Variant 03</option>
+                <option value="variant04">Variant 04</option>
+                <option value="variant05">Variant 05</option>
+                <option value="variant06">Variant 06</option>
+            </select>
+            <input type="color" id="noseColor" onchange="generateAvatar()">
+        </div>
+        <div class="mouth-selection">
+            <label for="mouth">Mouth:</label>
+            <select id="mouth" onchange="generateAvatar()">
+                <option value="happy01">Happy 01</option>
+                <option value="happy02">Happy 02</option>
+                <option value="happy03">Happy 03</option>
+                <option value="happy04">Happy 04</option>
+                <option value="happy05">Happy 05</option>
+                <option value="happy06">Happy 06</option>
+                <option value="happy07">Happy 07</option>
+                <option value="happy08">Happy 08</option>
+                <option value="happy09">Happy 09</option>
+                <option value="happy10">Happy 10</option>
+                <option value="happy11">Happy 11</option>
+                <option value="happy12">Happy 12</option>
+                <option value="happy13">Happy 13</option>
+                <option value="happy14">Happy 14</option>
+                <option value="happy15">Happy 15</option>
+                <option value="happy16">Happy 16</option>
+                <option value="happy17">Happy 17</option>
+                <option value="happy18">Happy 18</option>
+                <option value="sad01">Sad 01</option>
+                <option value="sad02">Sad 02</option>
+                <option value="sad03">Sad 03</option>
+                <option value="sad04">Sad 04</option>
+                <option value="sad05">Sad 05</option>
+                <option value="sad06">Sad 06</option>
+                <option value="sad07">Sad 07</option>
+                <option value="sad08">Sad 08</option>
+                <option value="sad09">Sad 09</option>
+            </select>
+            <input type="color" id="mouthColor" onchange="generateAvatar()">
+        </div>
+        <div class="head-selection">
+            <label for="head">Head Shape:</label>
+            <select id="head" onchange="generateAvatar()">
+                <option value="variant01">Variant 01</option>
+                <option value="variant02">Variant 02</option>
+                <option value="variant03">Variant 03</option>
+                <option value="variant04">Variant 04</option>
+            </select>
+        </div>
+        <div class="beard-selection">
+            <label for="beard">Beard:</label>
+            <input type="checkbox" id="beardCheckbox" onchange="handleBeardChange()">
+            <select id="beard" onchange="generateAvatar()" disabled>
+                <option value="variant01">Variant 01</option>
+                <option value="variant02">Variant 02</option>
+            </select>
+        </div>
+        <div class="skincolor-selection">
+            <p>Skin Color: <input type="color" id="skinColor" value="#FFFFFF" onchange="generateAvatar()"></p>          
+        </div>
+        <div class="backgroundcolor-selection">
+            <p>Background Color: <input type="color" id="backgroundColor" value="#FFFFFF" onchange="generateAvatar()"></p>          
+        </div>
+    </div>
+        <div id="result-and-buttons">
+        <div id="avatar-container"> </div>
+        <div class="randomize-button">
+            <button onclick="randomizeAvatar()">Randomize</button>
+            <button onclick="saveImage()">Generate Image</button>
+        </div>    
+        </div>    
+    </div>
+    <a href="https://www.dicebear.com/styles/lorelei/" target="_blank"><p>©Lorelei - Dicebear</p></a>
+    <script src="script.js"></script>
+    <script src="randomize.js"></script>
+</body>
+</html>

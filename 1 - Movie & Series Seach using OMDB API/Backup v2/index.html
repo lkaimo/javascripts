@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMDb API Test</title>
+
+    <!-- Add Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
+    
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light-mode">
+
+    <header>
+
+        <h1 id="kflixerHeading">Kflixer</h1>
+        
+    <!-- Search container with input and button inside -->
+    <div class="search-container">
+        <input type="text" id="movieTitle" placeholder="e.g., Spider-Man" onkeydown="handleKeyPress(event)">
+        <button onclick="fetchMovieDetails()"><i class="fas fa-search"></i></button>
+    </div>
+
+
+        <!-- Toggle Mode button inside the header -->
+        <button class="mode-toggle-button" onclick="toggleMode()">
+            <i class="fas fa-sun"></i> <!-- Sun icon for light mode -->
+        </button>
+    </header>
+
+    
+    <div  id="output">
+        <p id="placeholder-text" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">Try searching a movie or series</p>
+        <!--           -->
+    </div>
+
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal">&times;</span>
+            <p id="modalMessage"></p>
+        </div>
+    </div>
+
+    <!-- Add Font Awesome script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>

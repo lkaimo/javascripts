@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex Clone</title>
+    <link rel="stylesheet" href="PokemonListstyles.css">
+
+    <style>
+        body {
+            background-image: url('img/background.png');
+            background-size: cover;
+            /* or 'contain' depending on your preference */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* optional, makes the background image fixed */
+            /* You can also add other background properties like background-position, background-color, etc. */
+        }
+
+        #home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 85vh;
+            /* Set the height to 100% of the viewport height */
+        }
+
+        .comic-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #ff5252;
+            border: 2px solid #000;
+            border-radius: 10px;
+            box-shadow: 5px 5px 0px #000;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .comic-button:hover {
+            background-color: #fff;
+            color: #ff5252;
+            border: 2px solid #ff5252;
+            box-shadow: 5px 5px 0px #ff5252;
+        }
+
+        .comic-button:active {
+            background-color: #fcf414;
+            box-shadow: none;
+            transform: translateY(4px);
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="home">
+        <div>
+            <img src="img/pokedex.png" alt="Pokedex" style="width: 350px; height: auto; ">
+        </div>
+        <a href="Pokedex.html">
+            <button class="comic-button">Start</button>
+        </a>
+    </div>
+
+</body>
+
+</html>

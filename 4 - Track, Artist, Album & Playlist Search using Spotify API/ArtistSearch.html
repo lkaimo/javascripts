@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- FontAwesome library -->
+
+    <title>Spotify Artist Search</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+            background-color: #121212;
+            /* Dark background color */
+            color: #fff;
+            /* Light text color */
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            background-color: #282828;
+            /* Dark input background color */
+            color: #fff;
+            /* Light text color */
+            border: 1px solid #666;
+            /* Dark border color */
+        }
+
+        #sidebar {
+            text-align: left;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #1DB954;
+            /* Dark background color */
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            /* Optional: Add shadow for depth */
+        }
+
+        #sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #fffcfc;
+            display: block;
+            transition: 0.3s;
+        }
+
+        #sidebar a:hover {
+            color: #555a5f;
+            /* Hover color */
+        }
+
+        #sidebar .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 15px;
+            font-size: 30px;
+            color: #ffffff;
+            /* Close button color */
+            cursor: pointer;
+        }
+
+        .hamburger-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 25px;
+            cursor: pointer;
+            color: #1DB954;
+            /* Hamburger button color */
+            transition: color 0.3s
+        }
+
+        .hamburger-btn:hover {
+            color: #17af2b;
+            /* Change color on hover */
+            cursor: pointer;
+        }
+
+        #content {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+
+        h1 {
+            color: #1DB954;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #1DB954;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .track {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            backdrop-filter: blur(0px) saturate(79%);
+            -webkit-backdrop-filter: blur(0px) saturate(79%);
+            background-color: rgba(59, 71, 56, 0.41);
+            /*            background-color: rgba(66, 106, 57, 0.41);
+            */
+            border: 1px solid rgba(255, 255, 255, 0.125);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .track:hover {
+            background-color: #1DB954;
+        }
+
+        img {
+            width: 250px;
+            max-height: 250px;
+            border-radius: 50%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        /* Additional styles for modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #292828;
+            /* Dark background color */
+            color: #fff;
+            /* Light text color */
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-y: auto;
+            /* Add this line to make it scrollable */
+            max-height: 80vh;
+            /* Set a maximum height for better usability */
+            position: relative;
+            /* Add this line */
+        }
+
+        #modalImage {
+            border-radius: 50%;
+            margin: auto;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .close:hover{
+            color: white;
+        }
+
+        .discography-container {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .album {
+            width: 200px;
+            text-align: center;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .album:hover {
+            transform: scale(1.05);
+        }
+
+        .album img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .clickable-album {
+            cursor: pointer;
+        }
+
+
+        .album-info {
+            padding: 10px;
+        }
+
+
+        .album-type {
+            font-style: italic;
+            margin-top: 5px;
+            color: #777;
+        }
+
+        .album-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            cursor: default;
+        }
+
+        .album-iframe {
+            margin-bottom: 20px;
+        }
+
+
+        .related-artists-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .related-artist {
+            width: 160px;
+            text-align: center;
+            cursor: pointer;
+            /* Add cursor pointer for clickable effect */
+            border: 1px solid #ddd;
+            backdrop-filter: blur(0px) saturate(79%);
+            -webkit-backdrop-filter: blur(0px) saturate(79%);
+            background-color: rgba(59, 71, 56, 0.41);
+            /*            background-color: rgba(66, 106, 57, 0.41);
+            */
+            border: 1px solid rgba(255, 255, 255, 0.125);
+            border-radius: 10px;
+        }
+
+        .related-artist:hover {
+            background-color: #1DB954;
+        }
+
+        .related-artist img {
+            border-radius: 50%;
+            width: 150px;
+            /* Adjust the size as needed */
+            height: 150px;
+            /* Adjust the size as needed */
+            object-fit: cover;
+        }
+
+        .related-artist p {
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .search-link::after {
+            content: '\1F50D';
+            /* Unicode character for the magnifying glass icon */
+            margin-left: 5px;
+            /* Adjust the spacing between the text and the icon */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="sidebar">
+        <img style="border-radius:50%; height: 150px; width: 150px; display: block; margin: 0 auto;" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXZtc3FxZ3R5aXhqMHAzejF0MnhlMnFxZDQzZTRxZTM1dGd1OWVhaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/E0yTpDqB3AI8fv8WsB/giphy.gif">
+        <p style="text-align: center; margin-bottom: 50px;">kaimosalalima@gmail.com</p>
+        <a href="#" class="close-btn" onclick="closeNav()">&larr;</a>
+        <a href="index.html">Home</a>
+        <a href="TrackSearch.html">Search Track</a>
+        <a href="ArtistSearch.html" class="search-link">Search Artist</a>
+        <a href="AlbumSearch.html">Search Album</a>
+        <a href="PlaylistSearch.html">Search Playlist</a>
+        <a style="margin-top: 50px;" href="https://www.spotify.com/" target="_blank" rel="noopener noreferrer">©
+            Spotify</a>
+    </div>
+
+
+    <div id="content">
+        <p>
+        <div class="hamburger-btn" onclick="openNav()"><i class="fas fa-bars"></i></div>
+        </p>
+        <h1>Spotify Artist Search</h1>
+
+        <label for="searchInput">Enter artist name:</label>
+        <input type="text" id="searchInput" placeholder="Enter artist name..." onkeyup="handleKeyUp(event)">
+        <button onclick="searchArtist()">Search</button>
+
+        <div id="result"></div>
+    </div>
+    <!-- Modal -->
+    <div id="artistModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalArtistName"></h2>
+            <img id="modalImage" alt="Artist Image">
+            <p id="modalListeners"></p>
+            <h3>Top Songs on Spotify</h3>
+            <div id="modalTopSongs"></div>
+            <h3 style = "margin-top: 20px;">Discography</h3>
+            <div id="modalDiscography" class="discography-container"></div>
+            <div id="modalIframeContainer"></div>
+            <h3>Related Artists</h3>
+            <div id="modalRelatedArtists" class="related-artists-container"></div>
+        </div>
+    </div>
+
+    <script>
+
+        // Add this function to handle Enter key press
+        function handleKeyUp(event) {
+            if (event.key === "Enter") {
+                searchArtist();
+            }
+        }
+
+        function openNav() {
+            document.getElementById("sidebar").style.width = "250px";
+            document.getElementById("content").style.marginLeft = "0px";
+        }
+
+        function closeNav() {
+            document.getElementById("sidebar").style.width = "0";
+            document.getElementById("content").style.marginLeft = "0";
+        }
+
+
+        let accessToken;
+
+        function searchArtist() {
+            const searchInput = document.getElementById('searchInput').value;
+            const clientId = '942ba0dda713421986a698a3a3aee095';
+            const clientSecret = 'b47aa8cc84d2459fb882a9c9bdfa3963';
+            const base64Credentials = btoa(`${clientId}:${clientSecret}`);
+
+            fetch(`https://accounts.spotify.com/api/token`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': `Basic ${base64Credentials}`
+                },
+                body: 'grant_type=client_credentials'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    accessToken = data.access_token; // Remove const keyword
+
+                    fetch(`https://api.spotify.com/v1/search?q=${searchInput}&type=artist`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`
+                        }
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            displayResults(data.artists.items);
+                        })
+                        .catch(error => console.error('Error:', error));
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function displayResults(artists) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+
+            if (artists.length === 0) {
+                resultDiv.innerHTML = '<p>No results found.</p>';
+                return;
+            }
+
+            artists.forEach(artist => {
+                const artistDiv = document.createElement('div');
+                artistDiv.classList.add('track');
+                artistDiv.addEventListener('click', () => openModal(artist));
+                artistDiv.innerHTML = `
+                    <h3>${artist.name}</h3>
+                    <img src="${artist.images.length > 0 ? artist.images[0].url : 'img/nopic.png'}" alt="Artist Image">
+                    <p>Monthly Listeners: ${artist.followers.total.toLocaleString()}</p>
+                    `;
+                resultDiv.appendChild(artistDiv);
+            });
+        }
+
+        function openModal(artist) {
+            const modal = document.getElementById('artistModal');
+            const modalArtistName = document.getElementById('modalArtistName');
+            const modalImage = document.getElementById('modalImage');
+            const modalListeners = document.getElementById('modalListeners');
+            const modalTopSongs = document.getElementById('modalTopSongs');
+            const modalDiscography = document.getElementById('modalDiscography');
+            const modalRelatedArtists = document.getElementById('modalRelatedArtists');
+            const modalIframeContainer = document.getElementById('modalIframeContainer');
+
+            modalArtistName.textContent = artist.name;
+            modalImage.src = artist.images.length > 0 ? artist.images[0].url : 'img/nopic.png';
+            modalListeners.textContent = `Monthly Listeners: ${artist.followers.total.toLocaleString()}`;
+
+            // Fetch artist's top tracks
+            fetch(`https://api.spotify.com/v1/artists/${artist.id}/top-tracks?country=US`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const topSongs = data.tracks;
+                    modalTopSongs.innerHTML = ''; // Clear the list before adding iframes
+                    topSongs.forEach(song => {
+                        const iframe = document.createElement('iframe');
+                        iframe.src = `https://open.spotify.com/embed/track/${song.id}`;
+                        iframe.width = '100%';
+                        iframe.height = '80';
+                        iframe.frameBorder = '0';
+                        iframe.allowtransparency = 'true';
+                        iframe.allow = 'encrypted-media';
+
+                        // Set margin and padding to zero
+                        iframe.style.margin = '0';
+                        iframe.style.padding = '0';
+
+                        modalTopSongs.appendChild(iframe);
+                    });
+                })
+                .catch(error => console.error('Error fetching top tracks:', error));
+
+            // Fetch artist's albums (discography)
+            fetch(`https://api.spotify.com/v1/artists/${artist.id}/albums`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const albums = data.items;
+                    modalDiscography.innerHTML = ''; // Clear the list before adding albums
+
+                    albums.forEach(album => {
+                        const albumItem = document.createElement('div');
+                        const albumType = album.album_type === 'album' ? 'Album' : (album.album_type === 'single' ? (album.total_tracks > 1 ? 'EP' : 'Single') : 'EP');
+
+                        albumItem.innerHTML = `
+            <p class="album-title">
+                ${album.name} · ${albumType}
+            </p>
+            <iframe class="album-iframe" src="https://open.spotify.com/embed/album/${album.id}" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        `;
+                        modalDiscography.appendChild(albumItem);
+                    });
+                })
+                .catch(error => console.error('Error fetching discography:', error));
+
+
+            // Fetch related artists
+            fetch(`https://api.spotify.com/v1/artists/${artist.id}/related-artists`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const relatedArtists = data.artists;
+                    modalRelatedArtists.innerHTML = ''; // Clear the list before adding related artists
+
+                    relatedArtists.forEach(relatedArtist => {
+                        const relatedArtistItem = document.createElement('div');
+                        relatedArtistItem.classList.add('related-artist');
+                        relatedArtistItem.innerHTML = `
+                <img src="${relatedArtist.images.length > 0 ? relatedArtist.images[0].url : 'placeholder-url'}" alt="Related Artist Image">
+                <p>${relatedArtist.name}</p>
+            `;
+
+                        // Add click event listener to each related artist item
+                        relatedArtistItem.addEventListener('click', () => {
+                            // Close the modal
+                            closeModal();
+
+                            // Fetch details for the clicked related artist
+                            fetch(`https://api.spotify.com/v1/artists/${relatedArtist.id}`, {
+                                method: 'GET',
+                                headers: {
+                                    'Authorization': `Bearer ${accessToken}`
+                                }
+                            })
+                                .then(response => response.json())
+                                .then(clickedArtist => {
+                                    // Open a new modal with details of the clicked related artist
+                                    openModal(clickedArtist);
+                                })
+                                .catch(error => console.error('Error fetching clicked artist details:', error));
+                        });
+
+                        modalRelatedArtists.appendChild(relatedArtistItem);
+                    });
+                })
+                .catch(error => console.error('Error fetching related artists:', error));
+
+            modal.style.display = 'flex';
+        }
+
+
+        function closeModal() {
+            const modal = document.getElementById('artistModal');
+            modal.style.display = 'none';
+        }
+
+        // Close the modal if the user clicks outside of it
+        window.addEventListener('click', (event) => {
+            const modal = document.getElementById('artistModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YTS API Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.2/awesomplete.min.css">   
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <img id="ytsLogo" class="logo" src="img/Logo-YTS.svg" alt="YTS Logo">
+        <input type="text" id="searchInput" placeholder="Enter movie title" onkeypress="handleKeyPress(event)">
+        <!-- Search results will be displayed here 
+        <button onclick="searchMovies()">Search</button>
+        -->
+    </header>
+
+    <div id="searchResults" class="visible">
+        <!-- Search results will be displayed here -->
+    </div>
+
+    <div id="movieDetails" class="visible"></div>
+    <div id="movieSuggestions" class="visible"></div>
+
+    <div id="home" class="visible">
+        <img style=" height: 500px; width: auto;" src="img/movies.png">
+        <h1>Search & Download Movies</h1>
+     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.2/awesomplete.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.2/awesomplete.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

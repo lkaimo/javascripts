@@ -1,0 +1,132 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Light mode styles */
+body.light-mode {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+header {
+    background: linear-gradient(to right, #3498db, #2c3e50);
+    padding: 20px;
+    border-radius: 0px;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    color: #fff;
+    margin: 0;
+    font-size: 23px;
+    font-family: 'Rubik Doodle Shadow';
+}
+
+label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+/* Style the container for the search bar */
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    width: 70%;
+}
+
+/* Style for the search button in light mode */
+.search-container button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+/* Style for the search button in dark mode */
+body.dark-mode .search-container button {
+    color: #fff;
+}
+
+#output {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: left;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 0.3s;
+}
+
+.movie-details {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 20px;
+}
+
+.movie-details h2 {
+    color: inherit;
+    margin-bottom: 10px;
+}
+
+.movie-details img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 4px solid #000; /* Set border color to black */
+    animation: slideDown 0.5s ease-in-out; /* Define the slide-down animation */
+    animation-fill-mode: forwards; /* Keep the final state of the animation */
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%); /* Start off-screen above */
+    }
+    to {
+        transform: translateY(0); /* Move to the original position */
+    }
+}
+
+/* Style for the mode toggle button */
+.mode-toggle-button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+/* Rotate the button when clicked */
+.mode-toggle-button.clicked {
+    transform: rotate(180deg);
+}

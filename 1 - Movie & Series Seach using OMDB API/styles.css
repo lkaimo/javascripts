@@ -1,0 +1,331 @@
+/* App.css */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+
+/* Add your additional styles here */
+body {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Light mode styles */
+body.light-mode {
+  background-color: #fff;
+  color: #333;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+header {
+  background: linear-gradient(to right, #3498db, #2c3e50);
+  padding: 20px;
+  border-radius: 0px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#kflixerHeading {
+  cursor: pointer;
+}
+
+h1 {
+  color: #fff;
+  margin: 0;
+  font-size: 23px;
+  font-family: 'Rubik Doodle Shadow';
+}
+
+label {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+
+.search-results-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  /* Allow results to wrap to the next line on smaller screens */
+  justify-content: space-around;
+  /* Center the results horizontally */
+}
+
+.search-result-container {
+  width: 200px;
+  /* Adjust the width as needed for your design */
+  margin: 15px;
+  /* Add margin between result containers */
+  text-align: center;
+  cursor: pointer;
+  /* Show cursor as pointer to indicate clickability */
+}
+
+.centered-title {
+  margin-top: 10px;
+  /* Add more space between the poster and title */
+}
+
+.search-result-container img {
+  max-width: 100%;
+  /* Ensure the image doesn't exceed the container width */
+  height: auto;
+  /* Maintain the aspect ratio of the image */
+  cursor: pointer;
+  /* Show cursor as pointer to indicate clickability */
+  border: 3px solid black;
+}
+
+
+/* Styles for mobile screens */
+@media (max-width: 767px) {
+  .search-result-container {
+    width: 48%;
+    /* Show at least 2 posters per row */
+    margin: 1%;
+    /* Add a small margin between result containers */
+  }
+}
+
+/* Style the container for the search bar */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  max-width: 800px;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  width: 70%;
+}
+
+/* Style for the search button in light mode */
+.search-container button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+/* Style for the search button in dark mode */
+body.dark-mode .search-container button {
+  color: #fff;
+}
+
+#home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+  animation: zoomInOut 4s infinite alternate;
+  /* Apply the zoom in and out animation */
+}
+
+@keyframes zoomInOut {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  25%,
+  75% {
+    transform: scale(0.9);
+    /* Adjust the scale factor for zoom in/out */
+  }
+
+  50% {
+    transform: scale(1);
+  }
+}
+
+#output {
+  margin-top: 10px;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: left;
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: background-color 0.3s;
+}
+
+
+section.movie-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin:auto;
+  max-width: 800px;
+}
+
+.movie-poster {
+  margin-top: 100px;
+  flex: 0 0 45%;
+  margin-bottom: 20px;
+  justify-content: right;
+}
+
+.movie-poster img {
+  max-width: 100%;
+  /* Make the image responsive */
+  border-radius: 10px;
+  /* Add border-radius to the image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Add a subtle box shadow */
+  border: 3px solid black;
+}
+
+.movie-details {
+  flex: 0 0 45%;
+  box-sizing: border-box;
+
+}
+
+@media (max-width: 768px) {
+
+  .movie-poster,
+  .movie-details {
+    flex: 0 0 100%;
+    text-align: center;
+    margin-top: 0px;
+  }
+}
+
+.trailer-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.trailer-container iframe {
+  max-width: 100%;
+}
+
+.disclaimer-text {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.movie-details {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+.movie-details h2 {
+  color: inherit;
+  margin-bottom: 10px;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    /* Start off-screen above */
+  }
+
+  to {
+    transform: translateY(0);
+    /* Move to the original position */
+  }
+}
+
+/* Style for the mode toggle button */
+.mode-toggle-button {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+/* Rotate the button when clicked */
+.mode-toggle-button.clicked {
+  transform: rotate(180deg);
+  transition: transform 0.3s;
+  /* Add a transition for a smooth effect */
+}
+
+/* Add this to your CSS */
+.light-text {
+  color: black;
+}
+
+.dark-text {
+  color: white;
+}
+
+.imdb-logo {
+  font-size: 1.2em;
+  /* Adjust the font size as needed */
+  font-weight: bold;
+  /* Make the font bold */
+  background: linear-gradient(to right, #ffcc00, #ffae00);
+  /* Gradient background from yellow to a slightly darker shade */
+  color: #000000;
+  /* Set the text color to white for better contrast */
+  text-shadow: none;
+  /* Remove the text shadow for light mode */
+  letter-spacing: 0.5px;
+  /* Adjust the letter spacing as needed */
+  display: inline-block;
+  padding: 2px 5px;
+  /* Adjust the padding for better visual appearance */
+  border-radius: 8px 8px 8px 8px;
+  /* Adjust the border-radius for a distinctive IMDb logo look */
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+}
+
+body.dark-mode .modal-content {
+  background-color: #555;
+  /* Dark mode background color */
+  color: #fff;
+  /* Dark mode text color */
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
